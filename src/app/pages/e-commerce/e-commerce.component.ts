@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../@core/data/smart-table';
+import { Ad } from '../../models/Ad';
+import { AdService } from '../../services/ad.service';
 
 @Component({
   selector: 'ngx-ecommerce',
@@ -23,63 +25,29 @@ export class ECommerceComponent {
       confirmDelete: true,
     },
     columns: {
-      id: {
+      id_ad: {
         title: 'ID',
-        type: 'number',
-      },
-      firstName: {
-        title: 'First Name',
         type: 'string',
       },
-      lastName: {
-        title: 'Last Name',
+      id_client: {
+        title: 'id_client',
         type: 'string',
       },
-      username: {
-        title: 'Username',
+      link: {
+        title: 'link',
         type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      age: {
-        title: 'Age',
-        type: 'number',
       },
     },
   };
 
-  data1=[{
-    id:1,
-    firstName:'bedoui',
-    lastName:'nejd',
-    username:'ezui7',
-    email:'email',
-    age:10
-  },
-  {
-    id:2,
-    firstName:'bedoui14',
-    lastName:'nejd',
-    username:'ezui7',
-    email:'email',
-    age:10
-  },
-  {
-    id:3,
-    firstName:'bedoui25',
-    lastName:'nejd',
-    username:'ezui7',
-    email:'email',
-    age:10
-  }]
+  data:Ad[]=[];
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData) {
-    const data = this.service.getData();
-    this.source.load(data);
+  constructor(private service: SmartTableData,private _adservice:AdService) {
+    this.getallad();
+    console.log(this.data);
+    this.source.load(this.data);
   }
 
   onDeleteConfirm(event): void {
@@ -88,5 +56,13 @@ export class ECommerceComponent {
     } else {
       event.confirm.reject();
     }
+  }
+
+  getallad(){
+    this._adservice.getallad().subscribe(value=>{
+      this.data=value;
+    }
+      
+      )
   }
 }
