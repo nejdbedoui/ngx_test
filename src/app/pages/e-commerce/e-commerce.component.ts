@@ -11,11 +11,15 @@ import { AdService } from '../../services/ad.service';
 export class ECommerceComponent {
   settings = {
     add: {
+      confirmCreate: true,
+
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
     },
     edit: {
+      confirmSave: true,
+
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
@@ -26,6 +30,8 @@ export class ECommerceComponent {
     },
     columns: {
       id_ad: {
+        addable: false,
+        editable: false,
         title: 'ID',
         type: 'string',
       },
@@ -46,23 +52,38 @@ export class ECommerceComponent {
 
   constructor(private service: SmartTableData,private _adservice:AdService) {
     this.getallad();
-    console.log(this.data);
     this.source.load(this.data);
   }
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+      this._adservice.deletead(event['data']['id_ad']).subscribe(respone=>{
+        event.confirm.resolve();
+      });
     } else {
       event.confirm.reject();
     }
   }
 
+  onCreateConfirm(event) {
+    this._adservice.addad(event['newData']).subscribe(response=>{
+      event.confirm.resolve();
+    });
+
+  }
+  onSaveConfirm(event) {
+    this._adservice.updatead(event['newData']).subscribe(response=>{
+      event.confirm.resolve();
+    });
+  }
+
   getallad(){
     this._adservice.getallad().subscribe(value=>{
       this.data=value;
+      console.log(value);
     }
       
       )
   }
+
 }
