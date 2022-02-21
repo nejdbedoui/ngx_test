@@ -13,10 +13,12 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { ECommerceComponent } from './e-commerce.component';
 import { ChartModule } from 'angular2-chartjs';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { ClientsComponent } from './clients.component';
+
+
 
 @NgModule({
   imports: [
@@ -36,9 +38,9 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     Ng2SmartTableModule,
   ],
   declarations: [
-    ECommerceComponent,
+    ClientsComponent,
   ],
   providers: [
   ],
 })
-export class ECommerceModule { }
+export class ClientsModule { }

@@ -8,6 +8,28 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
+    title: 'Smart Table',
+    icon: 'archive-outline',
+    children: [
+      {
+        title: 'Ads',
+        link: '/pages/ad',
+      },
+      {
+        title: 'Clients',
+        link: '/pages/clients',
+      },
+      {
+        title: 'Companies',
+        link: '/pages/companies',
+      },
+      {
+        title: 'Contracts',
+        link: '/pages/contracts',
+      },
+    ],
+  },
+  {
     title: 'Auth',
     icon: 'lock-outline',
     children: [

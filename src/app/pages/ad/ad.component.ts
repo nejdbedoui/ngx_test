@@ -5,10 +5,11 @@ import { Ad } from '../../models/Ad';
 import { AdService } from '../../services/ad.service';
 
 @Component({
-  selector: 'ngx-ecommerce',
-  templateUrl: './e-commerce.component.html',
+  selector: 'ngx-ad',
+  templateUrl: './ad.component.html',
 })
-export class ECommerceComponent {
+export class AdComponent {
+
   settings = {
     add: {
       confirmCreate: true,
@@ -37,7 +38,7 @@ export class ECommerceComponent {
       },
       id_client: {
         editable: false,
-        title: 'id_client',
+        title: 'id client',
         type: 'string',
       },
       link: {
@@ -46,11 +47,11 @@ export class ECommerceComponent {
       },
     },
   };
-
   data:Ad[]=[];
 
   source: LocalDataSource = new LocalDataSource();
 
+  
   constructor(private service: SmartTableData,private _adservice:AdService) {
     this.getallad();
     this.source.load(this.data);
@@ -86,5 +87,7 @@ export class ECommerceComponent {
       
       )
   }
+
+  
 
 }

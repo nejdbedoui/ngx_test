@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AdComponent } from './ad.component';
 import {
   NbButtonModule,
   NbCardModule,
@@ -13,10 +14,12 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { ECommerceComponent } from './e-commerce.component';
 import { ChartModule } from 'angular2-chartjs';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
+
+
 
 @NgModule({
   imports: [
@@ -36,9 +39,9 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     Ng2SmartTableModule,
   ],
   declarations: [
-    ECommerceComponent,
+    AdComponent,
   ],
   providers: [
   ],
 })
-export class ECommerceModule { }
+export class AdModule { }

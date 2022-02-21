@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Contract } from '../Models/Contract';
 
 @Injectable({
   providedIn: 'root'
@@ -9,5 +10,9 @@ export class ContractService {
   
   constructor(private _http: HttpClient) {
     this.url="http://localhost:8080/api/contract";
+   }
+
+   getallContract(){
+    return this._http.get<Contract[]>(`${this.url}/get_contract`);
    }
 }

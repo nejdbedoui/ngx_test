@@ -1,25 +1,24 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../@core/data/smart-table';
-import { Ad } from '../../models/Ad';
-import { AdService } from '../../services/ad.service';
+import { Companie } from '../../Models/Companie';
+import { CompanieService } from '../../services/companie.service';
 
 @Component({
-  selector: 'ngx-ecommerce',
-  templateUrl: './e-commerce.component.html',
+  selector: 'ngx-companie',
+  templateUrl: './companie.component.html'
 })
-export class ECommerceComponent {
+export class CompanieComponent  {
+
   settings = {
     add: {
       confirmCreate: true,
-
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
     },
     edit: {
       confirmSave: true,
-
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
@@ -29,36 +28,47 @@ export class ECommerceComponent {
       confirmDelete: true,
     },
     columns: {
-      id_ad: {
+      id_companie: {
         addable: false,
         editable: false,
-        title: 'ID',
+        title: 'id companie',
         type: 'string',
       },
-      id_client: {
-        editable: false,
-        title: 'id_client',
+      full_name: {
+        title: 'full name',
         type: 'string',
       },
-      link: {
-        title: 'link',
+      email: {
+        title: 'Email',
+        type: 'string',
+      },
+      phone_number: {
+        title: 'phone number',
         type: 'string',
       },
     },
   };
 
-  data:Ad[]=[];
+  data:Companie[]=[];
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData,private _adservice:AdService) {
-    this.getallad();
+  constructor(private service: SmartTableData,private _compservice:CompanieService) {
+    this.getallCl();
     this.source.load(this.data);
   }
 
+  getallCl(){
+    this._compservice.getallComp().subscribe(value=>{
+      this.data=value;
+      console.log(value);
+    }
+      
+      )
+  }
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this._adservice.deletead(event['data']['id_ad']).subscribe(respone=>{
+      this._compservice.deletecomp(event['data']['id_ad']).subscribe(respone=>{
         event.confirm.resolve();
       });
     } else {
@@ -67,24 +77,15 @@ export class ECommerceComponent {
   }
 
   onCreateConfirm(event) {
-    this._adservice.addad(event['newData']).subscribe(response=>{
+    this._compservice.addcomp(event['newData']).subscribe(response=>{
       event.confirm.resolve();
     });
 
   }
   onSaveConfirm(event) {
-    this._adservice.updatead(event['newData']).subscribe(response=>{
+    this._compservice.updatecomp(event['newData']).subscribe(response=>{
       event.confirm.resolve();
     });
-  }
-
-  getallad(){
-    this._adservice.getallad().subscribe(value=>{
-      this.data=value;
-      console.log(value);
-    }
-      
-      )
   }
 
 }

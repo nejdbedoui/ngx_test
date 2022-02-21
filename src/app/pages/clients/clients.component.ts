@@ -1,25 +1,24 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../@core/data/smart-table';
-import { Ad } from '../../models/Ad';
-import { AdService } from '../../services/ad.service';
+import { ClientService } from '../../services/client.service';
+import { Client } from '../../models/Client';
 
 @Component({
-  selector: 'ngx-ecommerce',
-  templateUrl: './e-commerce.component.html',
+  selector: 'ngx-clients',
+  templateUrl: './clients.component.html',
 })
-export class ECommerceComponent {
+export class ClientsComponent {
+
   settings = {
     add: {
       confirmCreate: true,
-
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
     },
     edit: {
       confirmSave: true,
-
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
@@ -29,36 +28,39 @@ export class ECommerceComponent {
       confirmDelete: true,
     },
     columns: {
-      id_ad: {
+      id_client: {
         addable: false,
         editable: false,
-        title: 'ID',
+        title: 'id client',
         type: 'string',
       },
-      id_client: {
-        editable: false,
-        title: 'id_client',
+      full_name: {
+        title: 'full name',
         type: 'string',
       },
-      link: {
-        title: 'link',
+      email: {
+        title: 'Email',
+        type: 'string',
+      },
+      phone_number: {
+        title: 'phone number',
         type: 'string',
       },
     },
   };
 
-  data:Ad[]=[];
+  data:Client[]=[];
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData,private _adservice:AdService) {
-    this.getallad();
+  constructor(private service: SmartTableData,private _adsclient:ClientService) {
+    this.getallCl();
     this.source.load(this.data);
   }
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this._adservice.deletead(event['data']['id_ad']).subscribe(respone=>{
+      this._adsclient.deleteCl(event['data']['id_ad']).subscribe(respone=>{
         event.confirm.resolve();
       });
     } else {
@@ -67,19 +69,19 @@ export class ECommerceComponent {
   }
 
   onCreateConfirm(event) {
-    this._adservice.addad(event['newData']).subscribe(response=>{
+    this._adsclient.addCl(event['newData']).subscribe(response=>{
       event.confirm.resolve();
     });
 
   }
   onSaveConfirm(event) {
-    this._adservice.updatead(event['newData']).subscribe(response=>{
+    this._adsclient.updateCl(event['newData']).subscribe(response=>{
       event.confirm.resolve();
     });
   }
 
-  getallad(){
-    this._adservice.getallad().subscribe(value=>{
+  getallCl(){
+    this._adsclient.getallC().subscribe(value=>{
       this.data=value;
       console.log(value);
     }
@@ -88,3 +90,4 @@ export class ECommerceComponent {
   }
 
 }
+

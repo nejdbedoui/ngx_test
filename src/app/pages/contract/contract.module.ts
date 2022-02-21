@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import {
   NbButtonModule,
   NbCardModule,
@@ -13,10 +14,14 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { ECommerceComponent } from './e-commerce.component';
 import { ChartModule } from 'angular2-chartjs';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { ContractComponent } from './contract.component';
+import { DatePipe } from '@angular/common';
+
+
+
 
 @NgModule({
   imports: [
@@ -36,9 +41,10 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     Ng2SmartTableModule,
   ],
   declarations: [
-    ECommerceComponent,
+    ContractComponent,
   ],
   providers: [
+    DatePipe
   ],
 })
-export class ECommerceModule { }
+export class ContractModule { }
