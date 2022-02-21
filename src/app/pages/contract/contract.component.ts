@@ -11,6 +11,11 @@ import { DatePipe } from '@angular/common';
 })
 export class ContractComponent  {
   settings = {
+    actions:{
+      add:false,
+      edit:false,
+      delete:false,
+    },
     add: {
       confirmCreate: true,
       addButtonContent: '<i class="nb-plus"></i>',
@@ -36,8 +41,8 @@ export class ContractComponent  {
         title: 'id client',
         type: 'string',
       },
-      id_Companie: {
-        title: 'id Companie',
+      id_companie: {
+        title: 'id companie',
         type: 'string',
       },
       id_ad: {
@@ -54,24 +59,22 @@ export class ContractComponent  {
       },
       start_date: {
         title: 'start_date',
-        type: 'shortDate',
+        valuePrepareFunction: (date) => { 
+          var raw = new Date(date);
+  
+          var formatted = this.datePipe.transform(raw, 'dd MMM yyyy');
+          return formatted; 
+        }
       },
       end_date: {
         title: 'end_date',
-        type: 'shortDate',
+        valuePrepareFunction: (date) => { 
+          var raw = new Date(date);
+  
+          var formatted = this.datePipe.transform(raw, 'dd MMM yyyy');
+          return formatted; 
+        }
       },
-      created:{
-        title: 'created',
-        valuePrepareFunction: (created) => {
-        
-        console.log('created: ', created);
-        var raw = new Date(created);
-    
-        var formatted = this.datePipe.transform(raw, 'dd MMM yyyy');
-        console.log('formatted: ', formatted);
-        return formatted;
-      }}
-      
     },
   };
   data:Contract[]=[];

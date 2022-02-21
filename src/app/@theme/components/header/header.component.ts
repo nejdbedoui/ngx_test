@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
+  checked:boolean;
 
   themes = [
     {
@@ -46,6 +47,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private userService: UserData,
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService) {
+                this.checked=false;
   }
 
   ngOnInit() {
@@ -90,5 +92,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome() {
     this.menuService.navigateHome();
     return false;
+  }
+  toggle(event){
+    if(event){  
+      this.checked=true;
+      this.changeTheme("default");}
+    else{
+      this.checked=false;
+      this.changeTheme("dark");}
+    
   }
 }

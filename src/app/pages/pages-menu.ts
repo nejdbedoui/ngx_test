@@ -2,7 +2,7 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'smart table',
+    title: 'home',
     icon: 'shopping-cart-outline',
     link: '/pages/dashboard',
     home: true,
@@ -24,9 +24,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/companies',
       },
       {
+        title: 'Add Contracts',
+        link: '/pages/add-contract',
+      },
+      {
         title: 'Contracts',
         link: '/pages/contracts',
-      },
+      }
+      
     ],
   },
   {

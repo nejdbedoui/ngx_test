@@ -4,10 +4,10 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
-import { ClientsComponent } from './clients/clients.component';
 import { AdComponent } from './ad/ad.component';
 import { CompanieComponent } from './companie/companie.component';
 import { ContractComponent } from './contract/contract.component';
+import { AddContractComponent } from './add-contract/add-contract.component';
 
 
 const routes: Routes = [{
@@ -15,10 +15,15 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {path: 'dashboard',component: ECommerceComponent},
+    {path: 'add-contract',component: AddContractComponent},
     {path: 'ad',component: AdComponent},
-    {path: 'clients',component: ClientsComponent},
     {path: 'companies',component: CompanieComponent},
     {path: 'contracts',component: ContractComponent},
+    {
+      path: 'clients',
+      loadChildren: () => import('./Clients/Clients.module')
+        .then(m => m.ClientsModule),
+    },
   ],
 }];
 

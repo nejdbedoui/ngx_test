@@ -17,11 +17,13 @@ import { ChartModule } from 'angular2-chartjs';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { ClientsComponent } from './clients.component';
+import { ClientsRoutingModule } from './clients-routing.module';
 
 
 
 @NgModule({
   imports: [
+    ClientsRoutingModule,
     ThemeModule,
     NbCardModule,
     NbUserModule,

@@ -15,4 +15,10 @@ export class ContractService {
    getallContract(){
     return this._http.get<Contract[]>(`${this.url}/get_contract`);
    }
+
+   addcont(cont){
+    return this._http.post(`${this.url}/add_conract`,cont);
+   }
+
+
 }

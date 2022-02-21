@@ -36,6 +36,10 @@ export class AdComponent {
         title: 'ID',
         type: 'string',
       },
+      title: {
+        title: 'title',
+        type: 'string',
+      },
       id_client: {
         editable: false,
         title: 'id client',
