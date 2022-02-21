@@ -7,6 +7,10 @@ import { ClientService } from '../../services/client.service';
 import { CompanieService } from '../../services/companie.service';
 import { ContractService } from '../../services/contract.service';
 
+const pdfMake = require('pdfmake/build/pdfmake.js');
+const pdfFonts = require('pdfmake/build/vfs_fonts');
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'ngx-add-contract',
   templateUrl: './add-contract.component.html'
@@ -58,6 +62,25 @@ export class AddContractComponent implements OnInit {
     })
   }
   onSubmit() {
+
+    let dates = this.contract.start_date.getDate()+"/"+(this.contract.start_date.getMonth()+1)+"/"+this.contract.start_date.getFullYear();
+    let datee = this.contract.end_date.getDate()+"/"+(this.contract.end_date.getMonth()+1)+"/"+this.contract.end_date.getFullYear();
+
+    var docDefinition = { pageSize: 'A4',
+    header: {text: 'Contrat ', fontSize:30 ,alignment: 'center',bold:true},
+    content: [
+	    
+	    {text: "Le présent contrat est établi entre le client "+this.contract.id_client+" et l'entreprise "+this.contract.id_companie+" pour afficher la publicite "+this.contract.id_ad+" du "+dates+" au "+datee+" elle vas etre afficher "+this.contract.loop+" fois par jour et "+this.contract.days+" jour par semaine", fontSize: 14,alignment: 'center',
+	    margin: [0, 50, 0, 0]},
+	    
+	    {text: "signature client", listType: 'none',bold: true,italics: true,margin: [0, 40, 0, 0]},
+	    {text: "signature entreprise", listType: 'none',bold: true,italics: true,margin: [0, -12, 0, 0], alignment:'right'},
+		
+	
+	]
+  
+  };
+  pdfMake.createPdf(docDefinition).open();
     
       this._contservice.addcont(this.contract).subscribe(response=>{
         this.router.navigate(['pages/contracts']);
