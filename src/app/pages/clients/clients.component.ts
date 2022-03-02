@@ -60,7 +60,7 @@ export class ClientsComponent {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this._adsclient.deleteCl(event['data']['id_ad']).subscribe(respone=>{
+      this._adsclient.deleteCl(event['data']['id_client']).subscribe(respone=>{
         event.confirm.resolve();
       });
     } else {
