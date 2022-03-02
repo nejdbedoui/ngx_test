@@ -4,10 +4,14 @@ import { SmartTableData } from '../../@core/data/smart-table';
 import { Contract } from '../../Models/Contract';
 import { ContractService } from '../../services/contract.service';
 import { DatePipe } from '@angular/common';
+const pdfMake = require('pdfmake/build/pdfmake.js');
+const pdfFonts = require('pdfmake/build/vfs_fonts');
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'ngx-contract',
-  templateUrl: './contract.component.html'
+  templateUrl: './contract.component.html',
+  styleUrls: ['contract.component.scss'],
 })
 export class ContractComponent  {
   settings = {
@@ -16,23 +20,9 @@ export class ContractComponent  {
       edit:false,
       delete:false,
     },
-    add: {
-      confirmCreate: true,
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      confirmSave: true,
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
+ 
     columns: {
+     
       id_contract: {
         title: 'id contract',
         type: 'string',
@@ -95,6 +85,29 @@ export class ContractComponent  {
       )
   }
 
- 
+
+  
+
+  onSubmit(event) {
+
+    let dates = event.start_date.getDate()+"/"+(event.start_date.getMonth()+1)+"/"+event.start_date.getFullYear();
+    let datee = event.end_date.getDate()+"/"+(event.end_date.getMonth()+1)+"/"+event.end_date.getFullYear();
+
+    var docDefinition = { pageSize: 'A4',
+    header: {text: 'Contrat ', fontSize:30 ,alignment: 'center',bold:true},
+    content: [
+	    
+	    {text: "Le présent contrat est établi entre le client "+event.id_client+" et l'entreprise "+event.id_companie+" pour afficher la publicite "+event.id_ad+" du "+dates+" au "+datee+" elle vas etre afficher "+event.loop+" fois par jour et "+event.days+" jour par semaine", fontSize: 14,alignment: 'center',
+	    margin: [0, 50, 0, 0]},
+	    
+	    {text: "signature client", listType: 'none',bold: true,italics: true,margin: [0, 40, 0, 0]},
+	    {text: "signature entreprise", listType: 'none',bold: true,italics: true,margin: [0, -12, 0, 0], alignment:'right'},
+		
+	
+	]
+  
+  };
+  pdfMake.createPdf(docDefinition).open();  
+  }
 
 }

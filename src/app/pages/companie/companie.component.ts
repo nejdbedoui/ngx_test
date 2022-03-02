@@ -68,7 +68,7 @@ export class CompanieComponent  {
   }
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this._compservice.deletecomp(event['data']['id_ad']).subscribe(respone=>{
+      this._compservice.deletecomp(event['data']['id_companie']).subscribe(respone=>{
         event.confirm.resolve();
       });
     } else {
