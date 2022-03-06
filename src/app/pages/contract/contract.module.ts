@@ -19,12 +19,14 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { ContractComponent } from './contract.component';
 import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 
 
 @NgModule({
   imports: [
+    FormsModule,
     ThemeModule,
     NbCardModule,
     NbUserModule,

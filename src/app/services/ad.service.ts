@@ -8,7 +8,7 @@ import {Ad} from '../models/Ad'
 export class AdService {
 url;
   constructor(private _http: HttpClient) {
-    this.url="http://localhost:8080/api/ad";
+    this.url="https://backendnejd.herokuapp.com/api/ad";
    }
 
    getallad(){

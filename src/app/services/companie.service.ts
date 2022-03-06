@@ -8,7 +8,7 @@ import { Companie } from '../Models/Companie';
 export class CompanieService {
   url;
   constructor(private _http: HttpClient) {
-    this.url="http://localhost:8080/api/comp";
+    this.url="https://backendnejd.herokuapp.com/api/comp";
    }
    getallComp(){
     return this._http.get<Companie[]>(`${this.url}/get_Companies`);
