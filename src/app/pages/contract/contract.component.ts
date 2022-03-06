@@ -68,12 +68,14 @@ export class ContractComponent  {
     },
   };
   data:Contract[]=[];
+  contract;
 
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: SmartTableData,private datePipe: DatePipe,private _contractservice:ContractService) {
     this.getallCl();
     this.source.load(this.data);
+    this.contract=new Contract("","","","",0,0,null,null);
   }
 
   getallCl(){
@@ -108,6 +110,15 @@ export class ContractComponent  {
   
   };
   pdfMake.createPdf(docDefinition).open();  
+  }
+
+
+  onSubmit2() {
+    console.log(this.contract);
+    this._contractservice.addshow(this.contract).subscribe(value=>{
+    }
+      
+      )
   }
 
 }

@@ -9,5 +9,13 @@
       >
       </ng2-smart-table>
     </nb-card-body>
+    <form #updateForm="ngForm" #taskNewForm="ngForm" (ngSubmit)="onSubmit2();">
+    <nb-select placeholder="Select contract" name="id_contract" #id_contract="ngModel"
+                        [(ngModel)]="contract.id_contract">
+                        <nb-option *ngFor="let contract of data" value="{{contract.id_contract}}">{{contract.id_contract}}
+                        </nb-option>
+                    </nb-select>
+                    <button nbButton type="submit" value="Send" name="send">Send</button>
+    </form>
   </nb-card>
   
